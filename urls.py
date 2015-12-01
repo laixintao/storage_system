@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+import settings
 
 urlpatterns = [
+    #static
+    url(r'^staticfiles/(?P<path>.*)$',
+        'django.views.static.serve',
+        {'document_root':settings.STATICFILES_DIRS,
+         'show_indexes': True}),
+
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', 'storage.views.index'),
 ]
